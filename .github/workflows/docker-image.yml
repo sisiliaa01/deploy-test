@@ -4,7 +4,7 @@ on:
   push:
     branches: ["master"]
   
-jobs:
+  jobs:
   deploy:
     name: Setup Gcloud Account
     runs-on: ubuntu-latest
@@ -23,13 +23,13 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v2
-        
+
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
-        
+
       - name: Tag Docker image
         run: docker tag $IMAGE_NAME gcr.io/${{ secrets.GCP_PROJECT_ID }}/$IMAGE_NAME
-        
+
       - name: Push Docker image
         run: docker push $IMAGE_NAME
 
